@@ -4,6 +4,7 @@ using GunneryCalculatorCommon.Models.TFTs;
 using GunneryCalculatorCommon.Services.DataLayer;
 using GunneryCalculatorCommon.Services.Helpers;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace Common.Tests
         {
             //Arrange
             var dataService = this.serviceProvider.GetService<DataService>();
-            var am3TableGolf = dataService.GetTabularFiringTables(TFT.AM3);
+            var am3TableGolf = dataService.GetTabularFiringTables();
             var expectedTableGolf = am3TableGolf.TableGolf.First(x => x.AngleOfFire == AngleOfFire.LA && x.Charge == Charge._1L && x.Range == 2000);
 
             //Act
@@ -41,7 +42,7 @@ namespace Common.Tests
         {
             //Arrange
             var dataService = this.serviceProvider.GetService<DataService>();
-            var am3TableGolf = dataService.GetTabularFiringTables(TFT.AM3);
+            var am3TableGolf = dataService.GetTabularFiringTables();
             var expectedTableGolf = new TableGolf(
                 tft: TFT.AM3,
                 charge: Charge._1L,
@@ -72,7 +73,7 @@ namespace Common.Tests
         {
             //Arrange
             var dataService = this.serviceProvider.GetService<DataService>();
-            var am3Tables = dataService.GetTabularFiringTables(TFT.AM3);
+            var am3Tables = dataService.GetTabularFiringTables();
             var expectedTableFox = am3Tables.TableFox.First(x => x.AngleOfFire == AngleOfFire.LA && x.Charge == Charge._1L && x.Range == 2000);
 
             //Act
@@ -90,7 +91,7 @@ namespace Common.Tests
             //Arrange
             var range = 2020;
             var dataService = this.serviceProvider.GetService<DataService>();
-            var am3Tables = dataService.GetTabularFiringTables(TFT.AM3);
+            var am3Tables = dataService.GetTabularFiringTables();
             var expectedTableFox = new TableFox(
                 tft: TFT.AM3,
                 charge: Charge._1L,
@@ -121,5 +122,17 @@ namespace Common.Tests
             //Assert
             actualTableFox.Should().BeEquivalentTo(expectedTableFox);
         }
+
+        //[Fact]
+        //public void Test()
+        //{
+        //    var tableGolfs = Charge1Lima.TableGolf.Concat(Charge2Lima.TableGolf).Concat(Charge3Hotel.TableGolf).Concat(Charge4Hotel.TableGolf).Concat(Charge7Remeo.TableGolf);
+        //    var tableFoxs = Charge1Lima.TableFox.Concat(Charge2Lima.TableFox).Concat(Charge3Hotel.TableFox).Concat(Charge4Hotel.TableFox).Concat(Charge7Remeo.TableFox);
+
+        //    var jsonSearlizationSettings = new JsonSerializerSettings();
+        //    jsonSearlizationSettings.FloatParseHandling = FloatParseHandling.Decimal;
+        //    var tableGolfJson = JsonConvert.SerializeObject(tableGolfs, jsonSearlizationSettings);
+        //    var tableFoxJson = JsonConvert.SerializeObject(tableFoxs, jsonSearlizationSettings);
+        //}
     }
 }

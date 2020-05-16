@@ -2,13 +2,17 @@ using System;
 using Xunit;
 using GunneryCalculatorCommon.Services.Extensions;
 using GunneryCalculatorCommon.Models.Enums;
+using GunneryCalculatorCommon.Services.Helpers;
+using GunneryCalculatorCommon.Models;
+using System.Collections.Generic;
+using FluentAssertions;
 
 namespace Common.Tests
 {
     public class FAExpressExtenstionTest
     {
         [Fact]
-        public void FAExpressExtension_Express_ExpressToNearestWhole_ShouldExpressToNearstWhole()
+        public void GunneryHelper_Express_ExpressToNearestWhole_ShouldExpressToNearstWhole()
         {
             //Arrange
             var expectedResult = 2;
@@ -18,10 +22,10 @@ namespace Common.Tests
             var input4 = 2.51m;
 
             //Act
-            var result1 = input1.Express(FAExpressTo.Whole);
-            var result2 = input2.Express(FAExpressTo.Whole);
-            var result3 = input3.Express(FAExpressTo.Whole);
-            var result4 = input4.Express(FAExpressTo.Whole);
+            var result1 = GunneryHelper.Express(input1, FAExpressTo.Whole);
+            var result2 = GunneryHelper.Express(input2, FAExpressTo.Whole);
+            var result3 = GunneryHelper.Express(input3, FAExpressTo.Whole);
+            var result4 = GunneryHelper.Express(input4, FAExpressTo.Whole);
 
             //Assert
             Assert.Equal(expectedResult, result1);
@@ -31,7 +35,7 @@ namespace Common.Tests
         }
 
         [Fact]
-        public void FAExpressExtension_Express_ExpressToNearestTens_ShouldExpressToNearstTens()
+        public void GunneryHelper_Express_ExpressToNearestTens_ShouldExpressToNearstTens()
         {
             //Arrange
             var expectedResult = 20m;
@@ -41,10 +45,10 @@ namespace Common.Tests
             var input4 = 26m;
 
             //Act
-            var result1 = input1.Express(FAExpressTo.Tens);
-            var result2 = input2.Express(FAExpressTo.Tens);
-            var result3 = input3.Express(FAExpressTo.Tens);
-            var result4 = input4.Express(FAExpressTo.Tens);
+            var result1 = GunneryHelper.Express(input1,FAExpressTo.Tens);
+            var result2 = GunneryHelper.Express(input2, FAExpressTo.Tens);
+            var result3 = GunneryHelper.Express(input3, FAExpressTo.Tens);
+            var result4 = GunneryHelper.Express(input4, FAExpressTo.Tens);
 
             //Assert
             Assert.Equal(expectedResult, result1);
@@ -54,7 +58,7 @@ namespace Common.Tests
         }
 
         [Fact]
-        public void FAExpressExtension_Express_ExpressToNearestHundreds_ShouldExpressToNearstHundreds()
+        public void GunneryHelper_Express_ExpressToNearestHundreds_ShouldExpressToNearstHundreds()
         {
             //Arrange
             var expectedResult = 200m;
@@ -64,10 +68,10 @@ namespace Common.Tests
             var input4 = 260m;
 
             //Act
-            var result1 = input1.Express(FAExpressTo.Hundreds);
-            var result2 = input2.Express(FAExpressTo.Hundreds);
-            var result3 = input3.Express(FAExpressTo.Hundreds);
-            var result4 = input4.Express(FAExpressTo.Hundreds);
+            var result1 = GunneryHelper.Express(input1,FAExpressTo.Hundreds);
+            var result2 = GunneryHelper.Express(input2, FAExpressTo.Hundreds);
+            var result3 = GunneryHelper.Express(input3, FAExpressTo.Hundreds);
+            var result4 = GunneryHelper.Express(input4, FAExpressTo.Hundreds);
 
             //Assert
             Assert.Equal(expectedResult, result1);
@@ -77,7 +81,7 @@ namespace Common.Tests
         }
 
         [Fact]
-        public void FAExpressExtension_Express_ExpressToNearestThousands_ShouldExpressToNearstThousands()
+        public void GunneryHelper_Express_ExpressToNearestThousands_ShouldExpressToNearstThousands()
         {
             //Arrange
             var expectedResult = 2000m;
@@ -87,10 +91,10 @@ namespace Common.Tests
             var input4 = 2600m;
 
             //Act
-            var result1 = input1.Express(FAExpressTo.Thousands);
-            var result2 = input2.Express(FAExpressTo.Thousands);
-            var result3 = input3.Express(FAExpressTo.Thousands);
-            var result4 = input4.Express(FAExpressTo.Thousands);
+            var result1 = GunneryHelper.Express(input1,FAExpressTo.Thousands);
+            var result2 = GunneryHelper.Express(input2, FAExpressTo.Thousands);
+            var result3 = GunneryHelper.Express(input3, FAExpressTo.Thousands);
+            var result4 = GunneryHelper.Express(input4, FAExpressTo.Thousands);
 
             //Assert
             Assert.Equal(expectedResult, result1);
@@ -100,7 +104,7 @@ namespace Common.Tests
         }
 
         [Fact]
-        public void FAExpressExtension_Express_ExpressToNearestTenths_ShouldExpressToNearstTenths()
+        public void GunneryHelper_Express_ExpressToNearestTenths_ShouldExpressToNearstTenths()
         {
             //Arrange
             var expectedResult = 0.6m;
@@ -110,10 +114,10 @@ namespace Common.Tests
             var input4 = 0.66m;
 
             //Act
-            var result1 = input1.Express(FAExpressTo.Tenths);
-            var result2 = input2.Express(FAExpressTo.Tenths);
-            var result3 = input3.Express(FAExpressTo.Tenths);
-            var result4 = input4.Express(FAExpressTo.Tenths);
+            var result1 = GunneryHelper.Express(input1,FAExpressTo.Tenths);
+            var result2 = GunneryHelper.Express(input2, FAExpressTo.Tenths);
+            var result3 = GunneryHelper.Express(input3, FAExpressTo.Tenths);
+            var result4 = GunneryHelper.Express(input4, FAExpressTo.Tenths);
 
             //Assert
             Assert.Equal(expectedResult, result1);
@@ -123,7 +127,7 @@ namespace Common.Tests
         }
 
         [Fact]
-        public void FAExpressExtension_Express_ExpressToNearestHundredths_ShouldExpressToNearstHundredths()
+        public void GunneryHelper_Express_ExpressToNearestHundredths_ShouldExpressToNearstHundredths()
         {
             //Arrange
             var expectedResult = 0.02m;
@@ -133,10 +137,10 @@ namespace Common.Tests
             var input4 = 0.026m;
 
             //Act
-            var result1 = input1.Express(FAExpressTo.Hundredths);
-            var result2 = input2.Express(FAExpressTo.Hundredths);
-            var result3 = input3.Express(FAExpressTo.Hundredths);
-            var result4 = input4.Express(FAExpressTo.Hundredths);
+            var result1 = GunneryHelper.Express(input1,FAExpressTo.Hundredths);
+            var result2 = GunneryHelper.Express(input2, FAExpressTo.Hundredths);
+            var result3 = GunneryHelper.Express(input3, FAExpressTo.Hundredths);
+            var result4 = GunneryHelper.Express(input4, FAExpressTo.Hundredths);
 
             //Assert
             Assert.Equal(expectedResult, result1);
@@ -146,7 +150,7 @@ namespace Common.Tests
         }
 
         [Fact]
-        public void FAExpressExtension_Express_ExpressToNearestThousandths_ShouldExpressToNearstThousandths()
+        public void GunneryHelper_Express_ExpressToNearestThousandths_ShouldExpressToNearstThousandths()
         {
             //Arrange
             var expectedResult = 0.002m;
@@ -156,10 +160,10 @@ namespace Common.Tests
             var input4 = 0.0026m;
 
             //Act
-            var result1 = input1.Express(FAExpressTo.Thousandths);
-            var result2 = input2.Express(FAExpressTo.Thousandths);
-            var result3 = input3.Express(FAExpressTo.Thousandths);
-            var result4 = input4.Express(FAExpressTo.Thousandths);
+            var result1 = GunneryHelper.Express(input1,FAExpressTo.Thousandths);
+            var result2 = GunneryHelper.Express(input2, FAExpressTo.Thousandths);
+            var result3 = GunneryHelper.Express(input3, FAExpressTo.Thousandths);
+            var result4 = GunneryHelper.Express(input4, FAExpressTo.Thousandths);
 
             //Assert
             Assert.Equal(expectedResult, result1);
@@ -169,7 +173,7 @@ namespace Common.Tests
         }
 
         [Fact]
-        public void FAExpressExtension_Express_ExpressToNearestTenThousandths_ShouldExpressToNearstTenThousandths()
+        public void GunneryHelper_Express_ExpressToNearestTenThousandths_ShouldExpressToNearstTenThousandths()
         {
             //Arrange
             var expectedResult = 0.0002m;
@@ -179,16 +183,138 @@ namespace Common.Tests
             var input4 = 0.00026m;
 
             //Act
-            var result1 = input1.Express(FAExpressTo.TenThousandths);
-            var result2 = input2.Express(FAExpressTo.TenThousandths);
-            var result3 = input3.Express(FAExpressTo.TenThousandths);
-            var result4 = input4.Express(FAExpressTo.TenThousandths);
+            var result1 = GunneryHelper.Express(input1,FAExpressTo.TenThousandths);
+            var result2 = GunneryHelper.Express(input2, FAExpressTo.TenThousandths);
+            var result3 = GunneryHelper.Express(input3, FAExpressTo.TenThousandths);
+            var result4 = GunneryHelper.Express(input4, FAExpressTo.TenThousandths);
 
             //Assert
             Assert.Equal(expectedResult, result1);
             Assert.Equal(expectedResult, result2);
             Assert.Equal(expectedResult, result3);
             Assert.Equal(0.0003m, result4);
+        }
+
+        [Fact]
+        public void GunneryHelper_CaculateAzimuthOfFire_WithNonTraversingValues_ShouldReturnAOF()
+        {
+            //Arrange
+            var leftLimit = 1600;
+            var rightLimit = 2200;
+            var safetyDiagramSection = new SafetyDiagramSection()
+            {
+                LeftLimit = leftLimit,
+                RightLimit = rightLimit
+            };
+
+            var expectedAOF = 1900;
+
+            //Act
+            var actualAOF = GunneryHelper.CaculateAzimuthOfFire(new List<SafetyDiagramSection>() { safetyDiagramSection });
+
+            //Assert
+            Assert.Equal(expectedAOF, actualAOF);
+        }
+
+        [Fact]
+        public void GunneryHelper_CaculateAzimuthOfFire_WithTraversingValues_ShouldReturnAOFBelow6400WhichIsConvertedToZero()
+        {
+            //Arrange
+            var leftLimit = 6250;
+            var rightLimit = 200;
+            var safetyDiagramSection = new SafetyDiagramSection()
+            {
+                LeftLimit = leftLimit,
+                RightLimit = rightLimit
+            };
+
+            var expectedAOF = 0;
+
+            //Act
+            var actualAOF = GunneryHelper.CaculateAzimuthOfFire(new List<SafetyDiagramSection>() { safetyDiagramSection });
+
+            //Assert
+            Assert.Equal(expectedAOF, actualAOF);
+        }
+
+        [Fact]
+        public void GunneryHelper_CaculateAzimuthOfFire_WithTraversingValues_ShouldReturnAOFAbove6400()
+        {
+            //Arrange
+            var leftLimit = 6250;
+            var rightLimit = 300;
+            var safetyDiagramSection = new SafetyDiagramSection()
+            {
+                LeftLimit = leftLimit,
+                RightLimit = rightLimit
+            };
+
+            var expectedAOF = 100;
+
+            //Act
+            var actualAOF = GunneryHelper.CaculateAzimuthOfFire(new List<SafetyDiagramSection>() { safetyDiagramSection });
+
+            //Assert
+            Assert.Equal(expectedAOF, actualAOF);
+        }
+
+        [Fact]
+        public void GunneryHelper_CaculateAzimuthOfFire_WithTraversingValues_ShouldReturnAOFBelow6400()
+        {
+            //Arrange
+            var leftLimit = 6250;
+            var rightLimit = 0;
+            var safetyDiagramSection = new SafetyDiagramSection()
+            {
+                LeftLimit = leftLimit,
+                RightLimit = rightLimit
+            };
+
+            var expectedAOF = 6300;
+
+            //Act
+            var actualAOF = GunneryHelper.CaculateAzimuthOfFire(new List<SafetyDiagramSection>() { safetyDiagramSection });
+
+            //Assert
+            Assert.Equal(expectedAOF, actualAOF);
+        }
+
+        [Fact]
+        public void GunneryHelper_CaculateDeflections_WithNonTraversingValues_ShouldLeftAndRightDeflection()
+        {
+            //Arrange
+            var leftLimit = 1600;
+            var rightLimit = 2200;
+            var aof = 1900;
+            var minDrift = 9;
+            var maxDrift = 13;
+
+            var expectedDeflections = new Deflections(3509, 2913);
+
+            //Act
+            var actualDeflections = GunneryHelper.CaculateDeflections(aof, leftLimit, rightLimit, minDrift, maxDrift);
+
+            //Assert
+            actualDeflections.Should().BeEquivalentTo(expectedDeflections);
+        }
+
+        [Fact]
+        public void GunneryHelper_CaculateDeflections_WithTraversingValues_ShouldLeftAndRightDeflection()
+        {
+            //Arrange
+            var leftLimit = 6340;
+            var rightLimit = 0610;
+            var aof = 300;
+            var minDrift = 6;
+            var maxDrift = 11;
+
+            var expectedDeflections = new Deflections(3566, 2901);
+
+            //Act
+            var actualDeflections = GunneryHelper.CaculateDeflections(aof, leftLimit, rightLimit, minDrift, maxDrift);
+
+            //Assert
+            actualDeflections.Should().BeEquivalentTo(expectedDeflections);
         }
     }
 }

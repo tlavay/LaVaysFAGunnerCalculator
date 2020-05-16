@@ -14,8 +14,8 @@
     "CotAngleOfFall": 0.0,
     "TmlVel": 311.0,
     "MO": 0.0,
-    "PosCSF": 0.0,
-    "NegCSF": -0.0
+    "PosCSF": 0.000,
+    "NegCSF": 0.00
   },
   {
     "TFT": 0,
@@ -87,7 +87,7 @@
     "TmlVel": 285.0,
     "MO": 56.0,
     "PosCSF": 0.011,
-    "NegCSF": -0.01
+    "NegCSF": -0.010
   },
   {
     "TFT": 0,
@@ -357,7 +357,7 @@
     "TmlVel": 264.0,
     "MO": 3525.0,
     "PosCSF": -1.234,
-    "NegCSF": 1.2
+    "NegCSF": 1.20
   },
   {
     "TFT": 0,
@@ -393,7 +393,7 @@
     "TmlVel": 266.0,
     "MO": 3773.0,
     "PosCSF": -1.112,
-    "NegCSF": 1.1
+    "NegCSF": 1.10
   },
   {
     "TFT": 0,
@@ -428,8 +428,8 @@
     "CotAngleOfFall": 0.0,
     "TmlVel": 452.0,
     "MO": 0.0,
-    "PosCSF": 0.0,
-    "NegCSF": -0.0
+    "PosCSF": 0.000,
+    "NegCSF": 0.00
   },
   {
     "TFT": 0,
@@ -608,8 +608,8 @@
     "CotAngleOfFall": 1.4,
     "TmlVel": 289.0,
     "MO": 1544.0,
-    "PosCSF": 0.33,
-    "NegCSF": -0.25
+    "PosCSF": 0.330,
+    "NegCSF": -0.250
   },
   {
     "TFT": 0,
@@ -662,7 +662,7 @@
     "CotAngleOfFall": 0.4,
     "TmlVel": 313.0,
     "MO": 5119.0,
-    "PosCSF": -1.39,
+    "PosCSF": -1.390,
     "NegCSF": 1.31
   },
   {
@@ -674,7 +674,7 @@
     "ProbErrorsR": 22.0,
     "ProbErrorsD": 10.0,
     "ProbErrorsHB": 37.0,
-    "ProbErrorsTB": 0.1,
+    "ProbErrorsTB": 0.10,
     "ProbErrorsRB": 18.0,
     "AngleOfFall": 1246.0,
     "CotAngleOfFall": 0.4,
@@ -692,7 +692,7 @@
     "ProbErrorsR": 19.0,
     "ProbErrorsD": 9.0,
     "ProbErrorsHB": 39.0,
-    "ProbErrorsTB": 0.1,
+    "ProbErrorsTB": 0.10,
     "ProbErrorsRB": 16.0,
     "AngleOfFall": 1300.0,
     "CotAngleOfFall": 0.3,
@@ -734,8 +734,8 @@
     "CotAngleOfFall": 0.0,
     "TmlVel": 586.0,
     "MO": 0.0,
-    "PosCSF": 0.0,
-    "NegCSF": -0.0
+    "PosCSF": 0.000,
+    "NegCSF": 0.00
   },
   {
     "TFT": 0,
@@ -752,8 +752,8 @@
     "CotAngleOfFall": 62.4,
     "TmlVel": 537.0,
     "MO": 4.0,
-    "PosCSF": 0.0,
-    "NegCSF": -0.0
+    "PosCSF": 0.000,
+    "NegCSF": 0.00
   },
   {
     "TFT": 0,
@@ -914,7 +914,7 @@
     "CotAngleOfFall": 2.1,
     "TmlVel": 302.0,
     "MO": 1001.0,
-    "PosCSF": 0.07,
+    "PosCSF": 0.070,
     "NegCSF": -0.056
   },
   {
@@ -1076,7 +1076,7 @@
     "CotAngleOfFall": 0.3,
     "TmlVel": 331.0,
     "MO": 7479.0,
-    "PosCSF": -1.22,
+    "PosCSF": -1.220,
     "NegCSF": 1.18
   },
   {
@@ -1148,8 +1148,8 @@
     "CotAngleOfFall": 0.0,
     "TmlVel": 705.0,
     "MO": 0.0,
-    "PosCSF": 0.0,
-    "NegCSF": -0.0
+    "PosCSF": 0.000,
+    "NegCSF": 0.00
   },
   {
     "TFT": 0,
@@ -1166,8 +1166,8 @@
     "CotAngleOfFall": 91.2,
     "TmlVel": 651.0,
     "MO": 3.0,
-    "PosCSF": 0.0,
-    "NegCSF": -0.0
+    "PosCSF": 0.000,
+    "NegCSF": 0.00
   },
   {
     "TFT": 0,
@@ -1184,8 +1184,8 @@
     "CotAngleOfFall": 40.8,
     "TmlVel": 600.0,
     "MO": 11.0,
-    "PosCSF": 0.0,
-    "NegCSF": -0.0
+    "PosCSF": 0.000,
+    "NegCSF": 0.00
   },
   {
     "TFT": 0,
@@ -1365,7 +1365,7 @@
     "TmlVel": 309.0,
     "MO": 1150.0,
     "PosCSF": 0.034,
-    "NegCSF": -0.02
+    "NegCSF": -0.020
   },
   {
     "TFT": 0,
@@ -1436,7 +1436,7 @@
     "CotAngleOfFall": 1.1,
     "TmlVel": 317.0,
     "MO": 2936.0,
-    "PosCSF": 0.2,
+    "PosCSF": 0.200,
     "NegCSF": -0.141
   },
   {
@@ -1508,7 +1508,7 @@
     "CotAngleOfFall": 0.4,
     "TmlVel": 335.0,
     "MO": 8713.0,
-    "PosCSF": -1.49,
+    "PosCSF": -1.490,
     "NegCSF": 1.36
   },
   {
@@ -1616,8 +1616,8 @@
     "CotAngleOfFall": 0.0,
     "TmlVel": 685.0,
     "MO": 0.0,
-    "PosCSF": 0.0,
-    "NegCSF": -0.0
+    "PosCSF": 0.000,
+    "NegCSF": 0.00
   },
   {
     "TFT": 0,
@@ -1634,8 +1634,8 @@
     "CotAngleOfFall": 85.9,
     "TmlVel": 632.0,
     "MO": 3.0,
-    "PosCSF": 0.0,
-    "NegCSF": -0.0
+    "PosCSF": 0.000,
+    "NegCSF": 0.00
   },
   {
     "TFT": 0,
@@ -1653,7 +1653,7 @@
     "TmlVel": 581.0,
     "MO": 12.0,
     "PosCSF": 0.001,
-    "NegCSF": -0.0
+    "NegCSF": 0.00
   },
   {
     "TFT": 0,
@@ -1760,7 +1760,7 @@
     "CotAngleOfFall": 4.4,
     "TmlVel": 336.0,
     "MO": 354.0,
-    "PosCSF": 0.01,
+    "PosCSF": 0.010,
     "NegCSF": -0.005
   },
   {
@@ -1934,7 +1934,7 @@
     "ProbErrorsR": 52.0,
     "ProbErrorsD": 15.0,
     "ProbErrorsHB": 42.0,
-    "ProbErrorsTB": 0.1,
+    "ProbErrorsTB": 0.10,
     "ProbErrorsRB": 38.0,
     "AngleOfFall": 1013.0,
     "CotAngleOfFall": 0.6,
@@ -1977,7 +1977,7 @@
     "TmlVel": 333.0,
     "MO": 7966.0,
     "PosCSF": -1.759,
-    "NegCSF": 1.5
+    "NegCSF": 1.50
   },
   {
     "TFT": 0,
@@ -1995,7 +1995,7 @@
     "TmlVel": 335.0,
     "MO": 8655.0,
     "PosCSF": -1.384,
-    "NegCSF": 1.3
+    "NegCSF": 1.30
   },
   {
     "TFT": 0,
@@ -2013,7 +2013,7 @@
     "TmlVel": 336.0,
     "MO": 9144.0,
     "PosCSF": -1.245,
-    "NegCSF": 1.2
+    "NegCSF": 1.20
   },
   {
     "TFT": 0,
@@ -2049,7 +2049,7 @@
     "TmlVel": 337.0,
     "MO": 9827.0,
     "PosCSF": -1.116,
-    "NegCSF": 1.1
+    "NegCSF": 1.10
   },
   {
     "TFT": 0,

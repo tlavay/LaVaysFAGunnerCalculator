@@ -25,7 +25,7 @@ namespace Common.Tests
             var dataService = this.serviceProvider.GetService<DataService>();
 
             //Act
-            var tabularFiringTables = dataService.GetTabularFiringTables(TFT.AM3);
+            var tabularFiringTables = dataService.GetTabularFiringTables();
 
             //Assert
             Assert.True(tabularFiringTables.TableFox.All(x => x.TFT == TFT.AM3));

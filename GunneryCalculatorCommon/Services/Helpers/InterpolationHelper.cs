@@ -22,7 +22,7 @@ namespace GunneryCalculatorCommon.Services.Helpers
         public static decimal Interpolate(decimal x1, decimal x2, decimal x3, decimal y1, decimal y3, FAExpressTo expressTo)
         {
             var partialResult = ((x2 - x1) * (y3 - y1)) / (x3 - x1);
-            var expressPartialResult = partialResult.Express(expressTo);
+            var expressPartialResult = GunneryHelper.Express(partialResult, expressTo);
             return y1 + expressPartialResult;
         }
 

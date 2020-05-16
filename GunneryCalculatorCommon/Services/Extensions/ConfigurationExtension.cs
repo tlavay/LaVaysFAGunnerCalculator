@@ -14,7 +14,7 @@ namespace GunneryCalculatorCommon.Services.Extensions
             servicesCollection.AddSingleton<ServiceFactory>();
             servicesCollection.AddMemoryCache();
             servicesCollection.AddTransient<DataService>();
-            servicesCollection.AddTransient<SiteService>();
+            servicesCollection.AddTransient<SafetyService>();
         }
     }
 }

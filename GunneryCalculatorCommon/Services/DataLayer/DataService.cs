@@ -22,7 +22,7 @@ namespace GunneryCalculatorCommon.Services.DataLayer
             this.memoryCache = memoryCache;
         }
 
-        public TabularFiringTables GetTabularFiringTables(TFT tft)
+        public TabularFiringTables GetTabularFiringTables()
         {
             this.memoryCache.TryGetValue<TabularFiringTables>(tabularFiringTablesKey, out var tabularFiringTables);
             if (tabularFiringTables != null)
@@ -30,12 +30,13 @@ namespace GunneryCalculatorCommon.Services.DataLayer
                 return tabularFiringTables;
             }
 
+            //Todo: Replace this trash with actual database.
             var tableFox = FileHelper.LoadFile<IEnumerable<TableFox>>($@"{this.am3FileDirectory}\TableFox.json");
             var tableGolf = FileHelper.LoadFile<IEnumerable<TableGolf>>($@"{this.am3FileDirectory}\TableGolf.json");
             tabularFiringTables = new TabularFiringTables()
             {
-                TableFox = tableFox.Where(x => x.TFT == tft),
-                TableGolf = tableGolf.Where(x => x.TFT == tft)
+                TableFox = tableFox,
+                TableGolf = tableGolf
             };
 
             this.memoryCache.Set(tabularFiringTablesKey, tabularFiringTables, DateTimeOffset.Now.AddMonths(1));
