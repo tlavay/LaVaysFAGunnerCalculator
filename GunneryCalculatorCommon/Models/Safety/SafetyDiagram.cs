@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GunneryCalculatorCommon.Models
+namespace GunneryCalculatorCommon.Models.Safety
 {
     public sealed class SafetyDiagram
     {

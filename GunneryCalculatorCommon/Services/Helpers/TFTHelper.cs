@@ -48,7 +48,16 @@ namespace GunneryCalculatorCommon.Services.Helpers
             var tableFox = filteredTableFox.Where(x => x.Range == range);
             if (tableFox.Count() == 0)
             {
-                var lowerRange = filteredTableFox.Where(x => x.Range < range).OrderBy(x => x.Range).Last();
+                //AHHHHH
+                //Need to update for HA
+                //Order by will change by angle of fire....
+                var lowerRanges = filteredTableFox.Where(x => x.Range < range).OrderBy(x => x.Range);
+                TableFox lowerRange;
+                if (!lowerRanges.Any())
+                {
+                    lowerRange = filteredTableFox.OrderBy(x => x.Range).Last();
+                }
+
                 var higherRange = filteredTableFox.Where(x => x.Range > range).First();
 
                 return new TableFox(

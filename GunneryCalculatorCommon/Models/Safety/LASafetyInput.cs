@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GunneryCalculatorCommon.Models
+namespace GunneryCalculatorCommon.Models.Safety
 {
     public sealed class LASafetyInput
     {

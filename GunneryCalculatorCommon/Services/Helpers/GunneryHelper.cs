@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using GunneryCalculatorCommon.Exceptions;
 using GunneryCalculatorCommon.Models;
 using System.Linq;
+using GunneryCalculatorCommon.Models.Safety;
 
 [assembly: InternalsVisibleToAttribute("Common.Tests")]
 namespace GunneryCalculatorCommon.Services.Helpers
@@ -68,7 +69,7 @@ namespace GunneryCalculatorCommon.Services.Helpers
             return (int)Express(averageAzimuth, FAExpressTo.Hundreds);
         }
 
-        public static Deflections CaculateDeflections(int aof, int leftLimt, int rightLimit, int minDrift, int maxDrift)
+        public static Deflections CaculateDeflections(AngleOfFire angleOfFire, int aof, int leftLimt, int rightLimit, int minDrift, int maxDrift)
         {
             var leftDeflection = leftLimt > rightLimit ?
                 (aof + Constants.MaxMils) - leftLimt + Constants.CommonDeflection + minDrift :
@@ -76,7 +77,7 @@ namespace GunneryCalculatorCommon.Services.Helpers
 
             var rightDeflection = aof - rightLimit + Constants.CommonDeflection + maxDrift;
 
-            return new Deflections(leftDeflection, rightDeflection);
+            return new Deflections(angleOfFire, leftDeflection, rightDeflection);
         }
 
         private static int Express(decimal input, int divideBy)

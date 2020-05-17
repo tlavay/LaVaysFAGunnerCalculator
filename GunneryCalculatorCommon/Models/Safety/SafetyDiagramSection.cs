@@ -1,8 +1,9 @@
-﻿using System;
+﻿using GunneryCalculatorCommon.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace GunneryCalculatorCommon.Models
+namespace GunneryCalculatorCommon.Models.Safety
 {
     public sealed class SafetyDiagramSection
     {
@@ -11,5 +12,6 @@ namespace GunneryCalculatorCommon.Models
         public bool IsMinTimeRange { get; set; }
         public int LeftLimit { get; set; }
         public int RightLimit { get; set; }
+        public AngleOfFire AngleOfFire { get; set; }
     }
 }

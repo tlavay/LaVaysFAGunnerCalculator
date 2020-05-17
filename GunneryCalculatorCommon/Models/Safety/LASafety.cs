@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace GunneryCalculatorCommon.Models
+namespace GunneryCalculatorCommon.Models.Safety
 {
     public sealed class LASafety
     {
@@ -11,7 +11,7 @@ namespace GunneryCalculatorCommon.Models
         public string Charge { get; }
         public string TFT { get; }
         public IEnumerable<SafetyDiagram> SafetyDiagrams { get; }
-        public LASafetyRows LASafetyRows { get; }
+        public SafetyRows LASafetyRows { get; }
         public IEnumerable<SafetyT> SafetyT { get; }
 
         public LASafety(
@@ -20,7 +20,7 @@ namespace GunneryCalculatorCommon.Models
             string charge, 
             string tft,
             IEnumerable<SafetyDiagram> deflectionSafetyData,
-            LASafetyRows laSafetyRows,
+            SafetyRows laSafetyRows,
             IEnumerable<SafetyT> safetyT)
         {
             this.Loaction = location;

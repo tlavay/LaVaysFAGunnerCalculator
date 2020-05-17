@@ -6,6 +6,7 @@ using GunneryCalculatorCommon.Services.Helpers;
 using GunneryCalculatorCommon.Models;
 using System.Collections.Generic;
 using FluentAssertions;
+using GunneryCalculatorCommon.Models.Safety;
 
 namespace Common.Tests
 {
@@ -289,10 +290,10 @@ namespace Common.Tests
             var minDrift = 9;
             var maxDrift = 13;
 
-            var expectedDeflections = new Deflections(3509, 2913);
+            var expectedDeflections = new Deflections(AngleOfFire.LA, 3509, 2913);
 
             //Act
-            var actualDeflections = GunneryHelper.CaculateDeflections(aof, leftLimit, rightLimit, minDrift, maxDrift);
+            var actualDeflections = GunneryHelper.CaculateDeflections(AngleOfFire.LA, aof, leftLimit, rightLimit, minDrift, maxDrift);
 
             //Assert
             actualDeflections.Should().BeEquivalentTo(expectedDeflections);
@@ -308,10 +309,10 @@ namespace Common.Tests
             var minDrift = 6;
             var maxDrift = 11;
 
-            var expectedDeflections = new Deflections(3566, 2901);
+            var expectedDeflections = new Deflections(AngleOfFire.LA, 3566, 2901);
 
             //Act
-            var actualDeflections = GunneryHelper.CaculateDeflections(aof, leftLimit, rightLimit, minDrift, maxDrift);
+            var actualDeflections = GunneryHelper.CaculateDeflections(AngleOfFire.LA, aof, leftLimit, rightLimit, minDrift, maxDrift);
 
             //Assert
             actualDeflections.Should().BeEquivalentTo(expectedDeflections);

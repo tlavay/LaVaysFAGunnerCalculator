@@ -1,5 +1,7 @@
 ﻿using FluentAssertions;
 using GunneryCalculatorCommon.Models;
+using GunneryCalculatorCommon.Models.Enums;
+using GunneryCalculatorCommon.Models.Safety;
 using GunneryCalculatorCommon.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -49,12 +51,11 @@ namespace Common.Tests
                 }
             };
 
-
-            var deflections = new Deflections(3604, 2811);
-            var expectedSafetyT = new SafetyT(412, deflections, 183, 187, 14.3m, 14.5m, 20.0m);
+            var deflections = new Deflections(AngleOfFire.LA, 3604, 2811);
+            var expectedSafetyT = new SafetyT(AngleOfFire.LA, 412, deflections, 183, 187, 14.3m, 14.5m, 20.0m);
 
             //Act
-            var laSafetyData = safetyService.CaculatePreOccupationLASafety(laSafetyInput);
+            var laSafetyData = safetyService.CaculatePreOccupationSafety(laSafetyInput);
 
             //Assert
             laSafetyData.SafetyT.Should().BeEquivalentTo(expectedSafetyT);

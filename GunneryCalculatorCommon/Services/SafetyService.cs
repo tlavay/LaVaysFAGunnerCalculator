@@ -1,6 +1,6 @@
 ﻿using GunneryCalculatorCommon.Models;
 using GunneryCalculatorCommon.Models.Enums;
-using GunneryCalculatorCommon.Services.Builders;
+using GunneryCalculatorCommon.Models.Safety;
 using GunneryCalculatorCommon.Services.DataLayer;
 using GunneryCalculatorCommon.Services.Helpers;
 using System;
@@ -19,24 +19,22 @@ namespace GunneryCalculatorCommon.Services
             this.dataService = dataService;
         }
 
-        public void CaculatePreOccupationSafety()
-        {
-
-        }
-
-        public LASafety CaculatePreOccupationLASafety(LASafetyInput lASafetyInput)
+        public LASafety CaculatePreOccupationSafety(LASafetyInput lASafetyInput)
         {
             var tftParse = (TFT)Enum.Parse(typeof(TFT), lASafetyInput.TFT);
             var chargeParse = (Charge)Enum.Parse(typeof(Charge), lASafetyInput.Charge);
             var tabularFiringTables = this.dataService.GetTabularFiringTables();
-            var laSafetyRows = LASafetyRowBuilder.Build(
+            var safetyRows = SafetyHelper.BuildSafetyRows(
                 lASafetyInput.SafetyDiagramSections,
                 tftParse,
                 chargeParse,
                 tabularFiringTables,
                 lASafetyInput.BtryAlt);
-            var laSafetyDiagrams = LASafetyDiagramBuilder.Build(lASafetyInput.SafetyDiagramSections, laSafetyRows.LASafetyRowStandardConditions);
-            var safetyTs = LASafetyTBuilder.Build(laSafetyRows, laSafetyDiagrams);
+            var laSafetyDiagrams = SafetyHelper.BuildSafetyDiagram(
+                lASafetyInput.SafetyDiagramSections, 
+                safetyRows.LASafetyRowStandardConditions,
+                safetyRows.HASafetyRowDataStandardCondition);
+            var safetyTs = SafetyHelper.BuildSafetyTs(safetyRows, laSafetyDiagrams);
 
             return new LASafety(
                 lASafetyInput.Loaction, 
@@ -44,7 +42,7 @@ namespace GunneryCalculatorCommon.Services
                 lASafetyInput.Charge,
                 lASafetyInput.TFT,
                 laSafetyDiagrams, 
-                laSafetyRows,
+                safetyRows,
                 safetyTs);
         }
     }
