@@ -52,7 +52,7 @@ namespace GunneryCalculatorCommon.Services.Helpers
                 //Need to update for HA
                 //Order by will change by angle of fire....
                 var lowerRanges = filteredTableFox.Where(x => x.Range < range).OrderBy(x => x.Range);
-                TableFox lowerRange;
+                TableFox lowerRange = null;
                 if (!lowerRanges.Any())
                 {
                     lowerRange = filteredTableFox.OrderBy(x => x.Range).Last();
@@ -60,32 +60,56 @@ namespace GunneryCalculatorCommon.Services.Helpers
 
                 var higherRange = filteredTableFox.Where(x => x.Range > range).First();
 
-                return new TableFox(
+                return BuildTableFox(lowerRange, higherRange, tft, angleOfFire, charge, range);
+            }
+
+            return tableFox.Single();
+        }
+
+        private static TableFox BuildTableFox(TableFox lowerRange, TableFox higherRange, TFT tft, AngleOfFire angleOfFire, Charge charge, int range)
+        {
+            var elevation = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.Elevation, higherRange.Elevation, FAExpressTo.Tenths);
+            var fsForGrazeBurstFuzeM582 = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.FsForGrazeBurstFuzeM582, higherRange.FsForGrazeBurstFuzeM582, FAExpressTo.Tenths);
+            var dfsPer10MDecHob = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.DfsPer10MDecHob, higherRange.DfsPer10MDecHob, FAExpressTo.Hundredths);
+            var drPer1MilDElev = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.DrPer1MilDElev, higherRange.DrPer1MilDElev, FAExpressTo.Whole);
+            var fork = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.Fork, higherRange.Fork, FAExpressTo.Whole);
+            var tof = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.TOF, higherRange.TOF, FAExpressTo.Tenths);
+            var drift = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.Drift, higherRange.Drift, FAExpressTo.Tenths);
+            var cwOf1Knot = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.CwOf1Knot, higherRange.CwOf1Knot, FAExpressTo.Hundredths);
+            var muzzleVelocity1Dec = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.MuzzleVelocity1Dec, higherRange.MuzzleVelocity1Dec, FAExpressTo.Tenths);
+            var muzzleVelocity1Inc = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.MuzzleVelocity1Inc, higherRange.MuzzleVelocity1Inc, FAExpressTo.Tenths);
+            var rangeWind1KnotHead = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.RangeWind1KnotHead, higherRange.RangeWind1KnotHead, FAExpressTo.Tenths);
+            var rangeWind1KnotTail = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.RangeWind1KnotTail, higherRange.RangeWind1KnotTail, FAExpressTo.Tenths);
+            var airTemp1PctDec = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.AirTemp1PctDec, higherRange.AirTemp1PctDec, FAExpressTo.Tenths);
+            var airTemp1PctInc = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.AirTemp1PctInc, higherRange.AirTemp1PctInc, FAExpressTo.Tenths);
+            var airDensity1PctDec = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.AirDensity1PctDec, higherRange.AirDensity1PctDec, FAExpressTo.Tenths);
+            var airDensity1PctInc = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.AirDensity1PctInc, higherRange.AirDensity1PctInc, FAExpressTo.Tenths);
+            var projWTof1SQDec = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProjWTof1SQDec, higherRange.ProjWTof1SQDec, FAExpressTo.Whole);
+            var projWTof1SQInc = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProjWTof1SQInc, higherRange.ProjWTof1SQInc, FAExpressTo.Whole);
+
+            return new TableFox(
                     tft: tft,
                     charge: charge,
                     angleOfFire: angleOfFire,
                     range: range,
-                    elevation: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.Elevation, higherRange.Elevation, FAExpressTo.Tenths),
-                    fsForGrazeBurstFuzeM582: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.FsForGrazeBurstFuzeM582, higherRange.FsForGrazeBurstFuzeM582, FAExpressTo.Tenths),
-                    dfsPer10MDecHob: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.DfsPer10MDecHob, higherRange.DfsPer10MDecHob, FAExpressTo.Hundredths),
-                    drPer1MilDElev: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.DrPer1MilDElev, higherRange.DrPer1MilDElev, FAExpressTo.Whole),
-                    fork: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.Fork, higherRange.Fork, FAExpressTo.Whole),
-                    tof: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.TOF, higherRange.TOF, FAExpressTo.Tenths),
-                    drift: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.Drift, higherRange.Drift, FAExpressTo.Tenths),
-                    cwOf1Knot: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.CwOf1Knot, higherRange.CwOf1Knot, FAExpressTo.Hundredths),
-                    muzzleVelocity1Dec: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.MuzzleVelocity1Dec, higherRange.MuzzleVelocity1Dec, FAExpressTo.Tenths),
-                    muzzleVelocity1Inc: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.MuzzleVelocity1Inc, higherRange.MuzzleVelocity1Inc, FAExpressTo.Tenths),
-                    rangeWind1KnotHead: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.RangeWind1KnotHead, higherRange.RangeWind1KnotHead, FAExpressTo.Tenths),
-                    rangeWind1KnotTail: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.RangeWind1KnotTail, higherRange.RangeWind1KnotTail, FAExpressTo.Tenths),
-                    airTemp1PctDec: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.AirTemp1PctDec, higherRange.AirTemp1PctDec, FAExpressTo.Tenths),
-                    airTemp1PctInc: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.AirTemp1PctInc, higherRange.AirTemp1PctInc, FAExpressTo.Tenths),
-                    airDensity1PctDec: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.AirDensity1PctDec, higherRange.AirDensity1PctDec, FAExpressTo.Tenths),
-                    airDensity1PctInc: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.AirDensity1PctInc, higherRange.AirDensity1PctInc, FAExpressTo.Tenths),
-                    projWTof1SQDec: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProjWTof1SQDec, higherRange.ProjWTof1SQDec, FAExpressTo.Whole),
-                    projWTof1SQInc: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProjWTof1SQInc, higherRange.ProjWTof1SQInc, FAExpressTo.Whole));
-            }
-
-            return tableFox.Single();
-            }
+                    elevation: elevation,
+                    fsForGrazeBurstFuzeM582: fsForGrazeBurstFuzeM582,
+                    dfsPer10MDecHob: dfsPer10MDecHob,
+                    drPer1MilDElev: drPer1MilDElev,
+                    fork: fork,
+                    tof: tof,
+                    drift: drift,
+                    cwOf1Knot: cwOf1Knot,
+                    muzzleVelocity1Dec: muzzleVelocity1Dec,
+                    muzzleVelocity1Inc: muzzleVelocity1Inc,
+                    rangeWind1KnotHead: rangeWind1KnotHead,
+                    rangeWind1KnotTail: rangeWind1KnotTail,
+                    airTemp1PctDec: airTemp1PctDec,
+                    airTemp1PctInc: airTemp1PctInc,
+                    airDensity1PctDec: airDensity1PctDec,
+                    airDensity1PctInc: airDensity1PctInc,
+                    projWTof1SQDec: projWTof1SQDec,
+                    projWTof1SQInc: projWTof1SQInc);
+        }
     }
 }

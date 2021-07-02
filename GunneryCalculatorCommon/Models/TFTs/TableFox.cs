@@ -12,6 +12,13 @@ namespace GunneryCalculatorCommon.Models.TFTs
         public Charge Charge { get; }
         public AngleOfFire AngleOfFire { get; }
         public int Range { get; }
+        public decimal RangeDecimal
+        {
+            get
+            { 
+                return (decimal)this.Range; 
+            }
+        }
         public decimal Elevation { get; }
         public decimal FsForGrazeBurstFuzeM582 { get; }
         public decimal DfsPer10MDecHob { get; }
