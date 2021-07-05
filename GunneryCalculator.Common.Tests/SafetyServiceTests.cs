@@ -6,6 +6,7 @@ using GunneryCalculator.Common.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Xunit;
 
@@ -54,10 +55,11 @@ namespace GunneryCalculator.Common.Tests
             var expectedSafetyT = new SafetyT(AngleOfFire.LA, 412, deflections, 183, 187, 14.3m, 14.5m, 20.0m);
 
             //Act
-            var laSafetyData = safetyService.CaculatePreOccupationSafety(laSafetyInput);
+            var safety = safetyService.CaculatePreOccupationSafety(laSafetyInput);
+            var laSafetyT = safety.SafetyT.Single(s => s.AngleOfFire == AngleOfFire.LA);
 
             //Assert
-            laSafetyData.SafetyT.Should().BeEquivalentTo(expectedSafetyT);
+            laSafetyT.Should().BeEquivalentTo(expectedSafetyT);
         }
     }
 }

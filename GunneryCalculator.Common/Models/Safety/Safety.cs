@@ -2,7 +2,7 @@
 
 namespace GunneryCalculator.Common.Models.Safety
 {
-    public sealed class LASafety
+    public sealed class Safety
     {
         public string Loaction { get; }
         public int BtryAlt { get; }
@@ -12,7 +12,7 @@ namespace GunneryCalculator.Common.Models.Safety
         public SafetyRows LASafetyRows { get; }
         public IEnumerable<SafetyT> SafetyT { get; }
 
-        public LASafety(
+        public Safety(
             string location, 
             int btryAlt, 
             string charge, 

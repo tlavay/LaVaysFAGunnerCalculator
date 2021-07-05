@@ -19,7 +19,7 @@ namespace GunneryCalculator.Common.Services
             this.dataService = dataService;
         }
 
-        public LASafety CaculatePreOccupationSafety(LASafetyInput lASafetyInput)
+        public Safety CaculatePreOccupationSafety(LASafetyInput lASafetyInput)
         {
             var tftParse = (TFT)Enum.Parse(typeof(TFT), lASafetyInput.TFT);
             var chargeParse = (Charge)Enum.Parse(typeof(Charge), lASafetyInput.Charge);
@@ -36,7 +36,7 @@ namespace GunneryCalculator.Common.Services
                 safetyRows.HASafetyRowDataStandardCondition);
             var safetyTs = SafetyHelper.BuildSafetyTs(safetyRows, laSafetyDiagrams);
 
-            return new LASafety(
+            return new Safety(
                 lASafetyInput.Loaction, 
                 lASafetyInput.BtryAlt,
                 lASafetyInput.Charge,
