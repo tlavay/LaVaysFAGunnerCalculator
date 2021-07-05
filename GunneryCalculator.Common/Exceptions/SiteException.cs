@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Runtime.Serialization;
+using System.Text;
+
+namespace GunneryCalculator.Common.Exceptions
+{
+    public sealed class SiteException : GunneryException
+    {
+        public SiteException()
+        {
+        }
+
+        public SiteException(string message) : base(message)
+        {
+        }
+
+        public SiteException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
+}
