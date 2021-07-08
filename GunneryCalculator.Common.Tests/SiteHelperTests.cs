@@ -28,7 +28,7 @@ namespace GunneryCalculator.Common.Tests
             var tgtAlt = 0;
             var range = 2000;
             var charge = Charge._1L;
-            var angleOfFire = AngleOfFire.LA;
+            var angleOfFire = AngleOfFire.Low;
             var tft = TFT.AM3;
             var expectedSite = 0;
 
@@ -49,7 +49,7 @@ namespace GunneryCalculator.Common.Tests
             var tgtAlt = 10;
             var range = 2000;
             var charge = Charge._1L;
-            var angleOfFire = AngleOfFire.LA;
+            var angleOfFire = AngleOfFire.Low;
             var tft = TFT.AM3;
             var expectedSite = 5;
 
@@ -70,7 +70,7 @@ namespace GunneryCalculator.Common.Tests
             var tgtAlt = 0;
             var range = 2000;
             var charge = Charge._1L;
-            var angleOfFire = AngleOfFire.LA;
+            var angleOfFire = AngleOfFire.Low;
             var tft = TFT.AM3;
             var expectedSite = -5;
 
@@ -91,7 +91,7 @@ namespace GunneryCalculator.Common.Tests
             var tgtAlt = 0;
             var range = 2000;
             var charge = Charge._1L;
-            var angleOfFire = AngleOfFire.HA;
+            var angleOfFire = AngleOfFire.High;
             var tft = TFT.AM3;
             var expectedSite = 0;
 
@@ -112,7 +112,7 @@ namespace GunneryCalculator.Common.Tests
             var tgtAlt = 10;
             var range = 4500;
             var charge = Charge._1L;
-            var angleOfFire = AngleOfFire.HA;
+            var angleOfFire = AngleOfFire.High;
             var tft = TFT.AM3;
             var expectedSite = 0;
 
@@ -133,7 +133,7 @@ namespace GunneryCalculator.Common.Tests
             var tgtAlt = 33;
             var range = 4500;
             var charge = Charge._1L;
-            var angleOfFire = AngleOfFire.HA;
+            var angleOfFire = AngleOfFire.High;
             var tft = TFT.AM3;
             var expectedSite = -1;
 
@@ -154,7 +154,7 @@ namespace GunneryCalculator.Common.Tests
             var tgtAlt = 33;
             var range = 7600;
             var charge = Charge._1L;
-            var angleOfFire = AngleOfFire.HA;
+            var angleOfFire = AngleOfFire.High;
             var tft = TFT.AM3;
             var expectedSite = -7;
 
@@ -175,7 +175,7 @@ namespace GunneryCalculator.Common.Tests
             var tgtAlt = 0;
             var range = 2000;
             var charge = Charge._1L;
-            var angleOfFire = AngleOfFire.HA;
+            var angleOfFire = AngleOfFire.High;
             var tft = TFT.AM3;
             var expectedErrorMessageContents = $"HA Site can not be calculated for range: {range}";
 
