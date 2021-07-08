@@ -28,10 +28,10 @@ namespace GunneryCalculator.Common.Tests
             //Arrange
             var dataService = this.serviceProvider.GetService<DataService>();
             var am3TableGolf = dataService.GetTabularFiringTables();
-            var expectedTableGolf = am3TableGolf.TableGolf.First(x => x.AngleOfFire == AngleOfFire.LA && x.Charge == Charge._1L && x.Range == 2000);
+            var expectedTableGolf = am3TableGolf.TableGolf.First(x => x.AngleOfFire == AngleOfFire.Low && x.Charge == Charge._1L && x.Range == 2000);
 
             //Act
-            var actualTableGolf = TFTHelper.GetTableGolfRow(am3TableGolf.TableGolf, TFT.AM3, AngleOfFire.LA, Charge._1L, 2000);
+            var actualTableGolf = TFTHelper.GetTableGolfRow(am3TableGolf.TableGolf, TFT.AM3, AngleOfFire.Low, Charge._1L, 2000);
 
             //Assert
             actualTableGolf.Should().BeEquivalentTo(expectedTableGolf);
@@ -46,7 +46,7 @@ namespace GunneryCalculator.Common.Tests
             var expectedTableGolf = new TableGolf(
                 tft: TFT.AM3,
                 charge: Charge._1L,
-                angleOfFire: AngleOfFire.LA,
+                angleOfFire: AngleOfFire.Low,
                 range: 2020,
                 elevation: 111.5m,
                 probErrorsR: 7,
@@ -62,7 +62,7 @@ namespace GunneryCalculator.Common.Tests
                 negCSF: -0.010m);
 
             //Act
-            var actualTableGolf = TFTHelper.GetTableGolfRow(am3TableGolf.TableGolf, TFT.AM3, AngleOfFire.LA, Charge._1L, 2020);
+            var actualTableGolf = TFTHelper.GetTableGolfRow(am3TableGolf.TableGolf, TFT.AM3, AngleOfFire.Low, Charge._1L, 2020);
 
             //Assert
             actualTableGolf.Should().BeEquivalentTo(expectedTableGolf);
@@ -74,10 +74,10 @@ namespace GunneryCalculator.Common.Tests
             //Arrange
             var dataService = this.serviceProvider.GetService<DataService>();
             var am3Tables = dataService.GetTabularFiringTables();
-            var expectedTableFox = am3Tables.TableFox.First(x => x.AngleOfFire == AngleOfFire.LA && x.Charge == Charge._1L && x.Range == 2000);
+            var expectedTableFox = am3Tables.TableFox.First(x => x.AngleOfFire == AngleOfFire.Low && x.Charge == Charge._1L && x.Range == 2000);
 
             //Act
-            var actualTableFox = TFTHelper.GetTableFoxRow(am3Tables.TableFox, TFT.AM3, AngleOfFire.LA, Charge._1L, 2000);
+            var actualTableFox = TFTHelper.GetTableFoxRow(am3Tables.TableFox, TFT.AM3, AngleOfFire.Low, Charge._1L, 2000);
 
             //Assert
             actualTableFox.Should().BeEquivalentTo(expectedTableFox);
@@ -95,7 +95,7 @@ namespace GunneryCalculator.Common.Tests
             var expectedTableFox = new TableFox(
                 tft: TFT.AM3,
                 charge: Charge._1L,
-                angleOfFire: AngleOfFire.LA,
+                angleOfFire: AngleOfFire.Low,
                 range: range,
                 elevation: 111.5m,
                 fsForGrazeBurstFuzeM582: 6.9m,
@@ -117,7 +117,7 @@ namespace GunneryCalculator.Common.Tests
                 projWTof1SQInc: 16);
 
             //Act
-            var actualTableFox = TFTHelper.GetTableFoxRow(am3Tables.TableFox, TFT.AM3, AngleOfFire.LA, Charge._1L, range);
+            var actualTableFox = TFTHelper.GetTableFoxRow(am3Tables.TableFox, TFT.AM3, AngleOfFire.Low, Charge._1L, range);
 
             //Assert
             actualTableFox.Should().BeEquivalentTo(expectedTableFox);

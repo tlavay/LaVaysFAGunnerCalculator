@@ -20,7 +20,7 @@ namespace GunneryCalculator.Common.Services.Helpers
                 throw new SiteException("Range cannot be 0 when attempting to find site.");
             }
 
-            if (angleOfFire == AngleOfFire.HA)
+            if (angleOfFire == AngleOfFire.High)
             {
                 return FindHighAngleSite(tabularFiringTables, btryAlt, tgtAlt, range, charge, tft);
             }
@@ -38,7 +38,7 @@ namespace GunneryCalculator.Common.Services.Helpers
             var vi = FindVI(btryAlt, tgtAlt);
             var angleOfSite = FindAngleOfSite(vi, range);
             var targetOrientation = vi >= 0 ? TargetOrientation.TargetAboveGun : TargetOrientation.TargetBelowGun;
-            var cas = FindComplementaryAngleOfSite(tabularFiringTables, angleOfSite, range, AngleOfFire.LA, charge, tft, targetOrientation);
+            var cas = FindComplementaryAngleOfSite(tabularFiringTables, angleOfSite, range, AngleOfFire.Low, charge, tft, targetOrientation);
             var lowAngleSite = angleOfSite + cas;
             return (int)GunneryHelper.Express(lowAngleSite, FAExpressTo.Whole);
         }
@@ -48,7 +48,7 @@ namespace GunneryCalculator.Common.Services.Helpers
             var vi = FindVI(btryAlt, tgtAlt);
             var angleOfSite = FindAngleOfSite(vi, range);
             var targetOrientation = vi >= 0 ? TargetOrientation.TargetAboveGun : TargetOrientation.TargetBelowGun;
-            var _10MilSiteFactor = Find10MilSiteFactor(tabularFiringTables, range, AngleOfFire.HA, charge, tft, targetOrientation);
+            var _10MilSiteFactor = Find10MilSiteFactor(tabularFiringTables, range, AngleOfFire.High, charge, tft, targetOrientation);
             var highAngleSite = (angleOfSite / 10) * _10MilSiteFactor;
             return (int)GunneryHelper.Express(highAngleSite, FAExpressTo.Whole);
         }

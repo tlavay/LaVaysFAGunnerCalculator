@@ -2,7 +2,7 @@
 {
     public enum AngleOfFire
     {
-        LA,
-        HA
+        Low,
+        High
     }
 }
