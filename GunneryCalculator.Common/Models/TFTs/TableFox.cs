@@ -2,13 +2,8 @@
 
 namespace GunneryCalculator.Common.Models.TFTs
 {
-    public class TableFox
+    public sealed class TableFox : TftBase
     {
-        public TFT TFT { get; }
-        public Charge Charge { get; }
-        public AngleOfFire AngleOfFire { get; }
-        public int Range { get; }
-        public decimal Elevation { get; }
         public decimal FsForGrazeBurstFuzeM582 { get; }
         public decimal DfsPer10MDecHob { get; }
         public decimal DrPer1MilDElev { get; }
@@ -49,13 +44,9 @@ namespace GunneryCalculator.Common.Models.TFTs
             decimal airDensity1PctDec,
             decimal airDensity1PctInc,
             decimal projWTof1SQDec,
-            decimal projWTof1SQInc)
+            decimal projWTof1SQInc) 
+            : base(tft, charge, angleOfFire, range, elevation)
         {
-            this.TFT = tft;
-            this.Charge = charge;
-            this.AngleOfFire = angleOfFire;
-            this.Range = range;
-            this.Elevation = elevation;
             this.FsForGrazeBurstFuzeM582 = fsForGrazeBurstFuzeM582;
             this.DfsPer10MDecHob = dfsPer10MDecHob;
             this.DrPer1MilDElev = drPer1MilDElev;

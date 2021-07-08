@@ -1,15 +1,12 @@
-﻿using GunneryCalculator.Common.Exceptions;
-using GunneryCalculator.Common.Models.Enums;
+﻿using GunneryCalculator.Common.Models.Enums;
 using GunneryCalculator.Common.Models.TFTs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
-using System.Text;
 
 namespace GunneryCalculator.Common.Services.Helpers
 {
-    public static class TFTHelper
+    internal static class TFTHelper
     {
         public static TableGolf GetTableGolfRow(IEnumerable<TableGolf> tableGolfRows, TFT tft, AngleOfFire angleOfFire, Charge charge, int range)
         {
@@ -17,26 +14,8 @@ namespace GunneryCalculator.Common.Services.Helpers
             var tableGolf = filteredTableGolf.Where(x => x.Range == range);
             if (tableGolf.Count() == 0)
             {
-                var lowerRange = filteredTableGolf.Where(x => x.Range < range).OrderBy(x => x.Range).Last();
-                var higherRange = filteredTableGolf.Where(x => x.Range > range).First();
-
-                return new TableGolf(
-                    tft: lowerRange.TFT,
-                    charge: charge,
-                    angleOfFire: angleOfFire,
-                    range: range,
-                    elevation: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.Elevation, higherRange.Elevation, FAExpressTo.Tenths),
-                    probErrorsR: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProbErrorsR, higherRange.ProbErrorsR, FAExpressTo.Whole),
-                    probErrorsD: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProbErrorsD, higherRange.ProbErrorsD, FAExpressTo.Whole),
-                    probErrorsHB: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProbErrorsHB, higherRange.ProbErrorsHB, FAExpressTo.Whole),
-                    probErrorsTB: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProbErrorsTB, higherRange.ProbErrorsTB, FAExpressTo.Hundredths),
-                    probErrorsRB: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProbErrorsRB, higherRange.ProbErrorsRB, FAExpressTo.Tenths),
-                    angleOfFall: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.AngleOfFall, higherRange.AngleOfFall, FAExpressTo.Tenths),
-                    cotAngleOfFall: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.CotAngleOfFall, higherRange.CotAngleOfFall, FAExpressTo.Tenths),
-                    tmlVel: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.TmlVel, higherRange.TmlVel, FAExpressTo.Whole),
-                    mo: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.MO, higherRange.MO, FAExpressTo.Whole),
-                    posCSF: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.PosCSF, higherRange.PosCSF, FAExpressTo.Thousandths),
-                    negCSF: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.NegCSF, higherRange.NegCSF, FAExpressTo.Thousandths)); ;
+                var tftRanges = GetTftByRanges(filteredTableGolf, range);
+                return BuildTableGolf(tftRanges.lower, tftRanges.higher, tft, angleOfFire, charge, range);
             }
 
             return tableGolf.Single();
@@ -48,27 +27,69 @@ namespace GunneryCalculator.Common.Services.Helpers
             var tableFox = filteredTableFox.Where(x => x.Range == range);
             if (tableFox.Count() == 0)
             {
-                var lowerRanges = filteredTableFox.Where(x => x.Range < range).OrderBy(x => x.Range);
-                TableFox lowerRange = null;
-                if (!lowerRanges.Any())
-                {
-                    lowerRange = filteredTableFox.OrderBy(x => x.Range).Last();
-                }
-                else
-                {
-                    lowerRange = lowerRanges.Last();
-                }
-
-                var higherRange = filteredTableFox.Where(x => x.Range > range).First();
-
-                return BuildTableFox(lowerRange, higherRange, tft, angleOfFire, charge, range);
+                var tftRanges = GetTftByRanges(filteredTableFox, range);
+                return BuildTableFox(tftRanges.lower, tftRanges.higher, tft, angleOfFire, charge, range);
             }
 
             return tableFox.Single();
         }
 
+        public static bool IsRangable(IEnumerable<TftBase> tftRows, TFT tft, AngleOfFire angleOfFire, Charge charge, int range)
+        {
+            var filteredRows = tftRows.Where(x => x.TFT == tft && x.AngleOfFire == angleOfFire && x.Charge == charge).OrderBy(x => x.Range);
+            return filteredRows.Any(x => x.Range <= range);
+        }
+
+        private static (T lower, T higher) GetTftByRanges<T>(IEnumerable<T> tftRows, int range) where T : TftBase
+        {
+            var lowerRange = tftRows.Where(x => x.Range <= range).OrderBy(x => x.Range).LastOrDefault();
+            if (lowerRange == null)
+            {
+                lowerRange = tftRows.Last();
+            }
+
+            var higherRange = tftRows.Where(x => x.Range >= range).FirstOrDefault();
+            if (higherRange == null)
+            {
+                higherRange = tftRows.First();
+            }
+
+            return (lowerRange, higherRange);
+        }
+
+        private static TableGolf BuildTableGolf(TableGolf lowerRange, TableGolf higherRange, TFT tft, AngleOfFire angleOfFire, Charge charge, int range)
+        {
+            if (lowerRange == higherRange)
+            {
+                return lowerRange;
+            }
+
+            return new TableGolf(
+                tft: lowerRange.TFT,
+                charge: charge,
+                angleOfFire: angleOfFire,
+                range: range,
+                elevation: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.Elevation, higherRange.Elevation, FAExpressTo.Tenths),
+                probErrorsR: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProbErrorsR, higherRange.ProbErrorsR, FAExpressTo.Whole),
+                probErrorsD: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProbErrorsD, higherRange.ProbErrorsD, FAExpressTo.Whole),
+                probErrorsHB: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProbErrorsHB, higherRange.ProbErrorsHB, FAExpressTo.Whole),
+                probErrorsTB: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProbErrorsTB, higherRange.ProbErrorsTB, FAExpressTo.Hundredths),
+                probErrorsRB: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.ProbErrorsRB, higherRange.ProbErrorsRB, FAExpressTo.Tenths),
+                angleOfFall: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.AngleOfFall, higherRange.AngleOfFall, FAExpressTo.Tenths),
+                cotAngleOfFall: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.CotAngleOfFall, higherRange.CotAngleOfFall, FAExpressTo.Tenths),
+                tmlVel: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.TmlVel, higherRange.TmlVel, FAExpressTo.Whole),
+                mo: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.MO, higherRange.MO, FAExpressTo.Whole),
+                posCSF: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.PosCSF, higherRange.PosCSF, FAExpressTo.Thousandths),
+                negCSF: InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.NegCSF, higherRange.NegCSF, FAExpressTo.Thousandths));
+        }
+
         private static TableFox BuildTableFox(TableFox lowerRange, TableFox higherRange, TFT tft, AngleOfFire angleOfFire, Charge charge, int range)
         {
+            if (lowerRange == higherRange)
+            {
+                return lowerRange;
+            }
+
             var elevation = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.Elevation, higherRange.Elevation, FAExpressTo.Tenths);
             var fsForGrazeBurstFuzeM582 = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.FsForGrazeBurstFuzeM582, higherRange.FsForGrazeBurstFuzeM582, FAExpressTo.Tenths);
             var dfsPer10MDecHob = InterpolationHelper.Interpolate(lowerRange.Range, range, higherRange.Range, lowerRange.DfsPer10MDecHob, higherRange.DfsPer10MDecHob, FAExpressTo.Hundredths);
