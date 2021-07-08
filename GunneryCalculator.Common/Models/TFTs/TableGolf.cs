@@ -2,13 +2,8 @@
 
 namespace GunneryCalculator.Common.Models.TFTs
 {
-    public class TableGolf
+    public class TableGolf : TftBase
     {
-        public Enums.TFT TFT { get; }
-        public Charge Charge { get; }
-        public AngleOfFire AngleOfFire { get; }
-        public int Range { get; }
-        public decimal Elevation { get; }
         public decimal ProbErrorsR { get; }
         public decimal ProbErrorsD { get; }
         public decimal ProbErrorsHB { get; }
@@ -37,13 +32,9 @@ namespace GunneryCalculator.Common.Models.TFTs
             decimal tmlVel,
             decimal mo,
             decimal posCSF,
-            decimal negCSF)
+            decimal negCSF) 
+            : base(tft, charge, angleOfFire, range, elevation)
         {
-            this.TFT = tft;
-            this.Charge = charge;
-            this.AngleOfFire = angleOfFire;
-            this.Range = range;
-            this.Elevation = elevation;
             this.ProbErrorsR = probErrorsR;
             this.ProbErrorsD = probErrorsD;
             this.ProbErrorsHB = probErrorsHB;

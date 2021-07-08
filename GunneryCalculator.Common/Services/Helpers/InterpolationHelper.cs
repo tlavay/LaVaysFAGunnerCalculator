@@ -1,8 +1,4 @@
 ﻿using GunneryCalculator.Common.Models.Enums;
-using GunneryCalculator.Common.Services.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GunneryCalculator.Common.Services.Helpers
 {
@@ -10,7 +6,7 @@ namespace GunneryCalculator.Common.Services.Helpers
     {
         /// <summary>
         /// y2 = ((x2 - x1)(y3 - y1))/(x3 - x1)) > express > result expressPartialResult + y1
-        /// In FA expression we FA interpolarte the partial result before adding back into y1
+        /// In FA expression we FA interpolate the partial result before adding back into y1
         /// </summary>
         /// <param name="x1">input x1</param>
         /// <param name="x2">input x2</param>
