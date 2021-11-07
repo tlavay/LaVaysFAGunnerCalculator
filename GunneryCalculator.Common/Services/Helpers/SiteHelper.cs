@@ -55,8 +55,8 @@ namespace GunneryCalculator.Common.Services.Helpers
 
         private static decimal FindAngleOfSite(decimal vi, int range)
         {
-            var rangeIn1000s = range / 1000;
-            var result = (vi / rangeIn1000s) * Constants.SmartGuyFactor;
+            var rangeIn1000s = Decimal.Divide(range, 1000m);
+            var result = Decimal.Divide(vi,  rangeIn1000s) * Constants.SmartGuyFactor;
             return GunneryHelper.Express(result, FAExpressTo.Tenths);
         }
 
