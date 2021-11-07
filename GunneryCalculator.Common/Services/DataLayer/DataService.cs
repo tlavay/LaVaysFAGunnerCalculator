@@ -4,6 +4,7 @@ using GunneryCalculator.Common.Services.Helpers;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GunneryCalculator.Common.Services.DataLayer
 {

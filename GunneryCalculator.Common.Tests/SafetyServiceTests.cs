@@ -66,6 +66,45 @@ namespace GunneryCalculator.Common.Tests
         }
 
         [Fact]
+        public void SafetyService_GetLAPreOccupationSafety_WithValidInputData_ShouldComputSafety_2022()
+        {
+            //Arrange
+            var safetyService = this.serviceProvider.GetService<SafetyService>();
+            var laSafetyInput = new LASafetyInput()
+            {
+                Loaction = "TEST",
+                BtryAlt = 433,
+                Charge = "_2L",
+                TFT = "AM3",
+                SafetyDiagramSections = new List<SafetyDiagramSection>()
+                {
+                    new SafetyDiagramSection()
+                    {
+                        LeftLimit = 4100,
+                        RightLimit = 5100,
+                        Range = 3500,
+                        Altitude = 444,
+                        IsMinTimeRange = false,
+                        AngleOfFire = AngleOfFire.Low
+                    },
+                    new SafetyDiagramSection()
+                    {
+                        LeftLimit = 4100,
+                        RightLimit = 5100,
+                        Range = 9500,
+                        Altitude = 481,
+                        AngleOfFire = AngleOfFire.Low
+                    }
+                }
+            };
+
+            //Act
+            var safety = safetyService.CaculatePreOccupationSafety(laSafetyInput);
+
+            //Assert
+        }
+
+        [Fact]
         public void SafetyService_GetHAPreOccupationSafety_WithValidInputData_ShouldComputSafety()
         {
             //Arrange

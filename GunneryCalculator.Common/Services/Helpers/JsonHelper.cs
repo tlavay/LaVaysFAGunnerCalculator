@@ -7,16 +7,12 @@ namespace GunneryCalculator.Common.Services.Helpers
 {
     internal static class JsonHelper
     {
-        private readonly static JsonSerializerSettings jsonSerializerSettings;
-        static JsonHelper()
+        private readonly static JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings()
         {
-            jsonSerializerSettings = new JsonSerializerSettings()
-            {
-                FloatParseHandling = FloatParseHandling.Decimal
-            };
-        }
+            FloatParseHandling = FloatParseHandling.Decimal
+        };
 
-        private static string Serialize(object input)
+        public static string Serialize(object input)
         {
             return JsonConvert.SerializeObject(input, jsonSerializerSettings);
         }
