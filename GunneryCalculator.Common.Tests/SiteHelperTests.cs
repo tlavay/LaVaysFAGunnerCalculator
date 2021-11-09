@@ -156,7 +156,7 @@ namespace GunneryCalculator.Common.Tests
             var charge = Charge._1L;
             var angleOfFire = AngleOfFire.High;
             var tft = TFT.AM3;
-            var expectedSite = -7;
+            var expectedSite = -6;
 
             //Act
             var actualSite = SiteHelper.FindSite(tabularFiringTables, brtyAlt, tgtAlt, range, charge, angleOfFire, tft);

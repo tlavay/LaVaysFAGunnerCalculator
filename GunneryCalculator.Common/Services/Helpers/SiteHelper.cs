@@ -49,7 +49,7 @@ namespace GunneryCalculator.Common.Services.Helpers
             var angleOfSite = FindAngleOfSite(vi, range);
             var targetOrientation = vi >= 0 ? TargetOrientation.TargetAboveGun : TargetOrientation.TargetBelowGun;
             var _10MilSiteFactor = Find10MilSiteFactor(tabularFiringTables, range, AngleOfFire.High, charge, tft, targetOrientation);
-            var highAngleSite = (angleOfSite / 10) * _10MilSiteFactor;
+            var highAngleSite = Decimal.Divide(angleOfSite, 10) * _10MilSiteFactor;
             return (int)GunneryHelper.Express(highAngleSite, FAExpressTo.Whole);
         }
 
@@ -66,11 +66,11 @@ namespace GunneryCalculator.Common.Services.Helpers
             decimal tenMilSiteFactor;
             if (targetOrientation == TargetOrientation.TargetAboveGun)
             {
-                tenMilSiteFactor = 10 * (1 + csf);
+                tenMilSiteFactor = Decimal.Multiply(10, (1 + csf));
             }
             else
             {
-                tenMilSiteFactor = 10 * (1 - csf);
+                tenMilSiteFactor = Decimal.Multiply(10, (1 - csf));
             }
 
             return GunneryHelper.Express(tenMilSiteFactor, FAExpressTo.Tenths);
