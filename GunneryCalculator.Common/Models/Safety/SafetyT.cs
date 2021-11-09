@@ -8,10 +8,10 @@ namespace GunneryCalculator.Common.Models.Safety
         public int MaxQE { get; }
         public Deflections Deflections { get; }
         public int MinHeQe { get; }
-        public int? MinWpQe { get; }
-        public decimal? MinHeTi { get; }
-        public decimal? MinWpTi { get; }
-        public decimal? MinVt { get; }
+        public int MinWpQe { get; }
+        public decimal MinHeTi { get; }
+        public decimal MinWpTi { get; }
+        public decimal MinVt { get; }
 
         public SafetyT(
             AngleOfFire angleOfFire, 
